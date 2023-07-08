@@ -1,0 +1,9 @@
+
+package(default_visibility = ["//visibility:public"])
+
+cc_binary(
+    name = "executable",
+    srcs = ["hello_world.cpp"],
+    deps = ["//shared_lib:imported_lib"],
+    linkstatic = False,
+)

@@ -1,0 +1,28 @@
+load("//:debug.bzl", "dump")
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "shared_lib",
+    srcs = ["shared_lib.cpp"],
+    hdrs = ["shared_lib.h"],
+    includes = ["."],  # This helps dependent libraries find this library header(s).
+    linkstatic = False,
+)
+
+cc_import(
+    name = "imported_lib",
+    shared_library = "libshared_lib.so",
+    hdrs = ["shared_lib.h"],
+    includes = ["."],
+    # includes = [package_name()],  # This is workaround for cc_import bug.
+)
+
+dump(
+    name = "dump_shared_lib",
+    src = "base_imported",
+)
+
+dump(
+    name = "dump_imported_lib",
+    src = "base_imported",
+)
